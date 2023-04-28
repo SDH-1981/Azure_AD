@@ -1,0 +1,17 @@
+# Parameters
+$GuestEmail = "john@hotmail.com"
+$InviterMessage = "Hi Welkom by Organization X"
+
+# Invite creation
+$Invitation = New-AzureADMSInvitation `
+  -InvitedUserEmailAddress $GuestEmail `
+  -SendInvitationMessage $true `
+  -InviteRedirectUrl "https://myapps.microsoft.com" `
+  -InvitedUserMessageInfo @{
+      "customizedMessageBody" = $InviterMessage
+  }
+
+# Invite overview console
+Write-Host "Invite sent to: $GuestEmail."
+Write-Host "Message:"
+Write-Host $Invitation.InvitedUserMessageInfo.customizedMessageBody
